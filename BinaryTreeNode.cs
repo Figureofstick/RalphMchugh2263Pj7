@@ -71,5 +71,60 @@ namespace RalphMchugh2263Pj7
         {
             return true;
         }
+
+
+        /* Ralph Liam McHugh
+         */
+
+        public BinaryTreeNode find(int lookup)
+        {
+
+
+
+        }
+        /* Ralph Liam McHugh
+         */
+        public BinaryTreeNode findPredecessor(int lookup) { }
+        /* Ralph Liam McHugh
+         */
+        public string getStringOfAllInfixValues() { }
+        /* Ralph Liam McHugh
+         */
+        public void insert(BinaryTreeNode node)
+        {
+            // calls the find function to ensure no duplicates
+        }
+        /* Ralph Liam McHugh
+         */
+        public BinaryTreeNode minVal()
+        {
+            // this will recurse the left side down to the first value then return
+        }
+        /* Ralph Liam McHugh
+         */
+        public BinaryTreeNode maxVal() { 
+            // this will recurse the right side down to the last value then return
+        
+        
+        }
+        /* Ralph Liam McHugh
+         */
+        public void delete(BinaryTreeNode node)
+        {
+            // Calls the find function
+
+        }
+        /* Ralph Liam McHugh
+         */
+        public BinaryTreeNode setUnion() { }
+        /* Ralph Liam McHugh
+         */
+        public int minDepth() { }
+        /* Ralph Liam McHugh
+         */
+        public int maxDepth() { }
+
+
+
     }
 }
