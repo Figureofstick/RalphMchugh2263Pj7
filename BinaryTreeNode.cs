@@ -65,12 +65,12 @@ namespace RalphMchugh2263Pj7
         {
             if(nodeValue == "") { nodeValue = s; }
             if (!IsValInSubTree(s)) {
-                if (Convert.ToInt32(s) <= Convert.ToInt32(nodeValue))
+                if (Convert.ToInt32(s) < Convert.ToInt32(nodeValue))
                 {
                     if (leftTree == null) { leftTree = new BinaryTreeNode(); }
                     leftTree.InsertValIntoSubTree(s);
                 }
-                else if(Convert.ToInt32(s) >= Convert.ToInt32(nodeValue)){
+                else if(Convert.ToInt32(s) > Convert.ToInt32(nodeValue)){
                     if(rightTree == null) {  rightTree = new BinaryTreeNode(); }
                     rightTree.InsertValIntoSubTree(s);
 
@@ -82,7 +82,19 @@ namespace RalphMchugh2263Pj7
         ********************************************************************************/
         public Boolean IsValInSubTree(string s)
         {
-            return true;
+            if (nodeValue == s) { return true; }
+            // check left tree for val
+            else if (Convert.ToInt32(s) < Convert.ToInt32(nodeValue) && leftTree != null)
+            {
+                return leftTree.IsValInSubTree(s);
+            }
+            // check right tree for val
+            else if (Convert.ToInt32(s) > Convert.ToInt32(nodeValue) && rightTree != null)
+            {
+                return rightTree.IsValInSubTree(s);
+            }
+            // left tree and right tree didn't have it, return false
+            else { return false; }
         }
         /******************************************************************************
         * DeleteValFromSubTree locates and deletes Value from tree. returns true iff

@@ -16,6 +16,7 @@ namespace RalphMchugh2263Pj7
         {
             Random rand = new Random();
             BinaryTreeNode headOfTree = new BinaryTreeNode("0");
+            
             for(int i = 1; i <= 10000; i++) {
                 headOfTree.InsertValIntoSubTree(rand.Next(50000).ToString());
             }
