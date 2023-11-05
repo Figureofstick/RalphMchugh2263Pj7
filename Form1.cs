@@ -12,6 +12,15 @@ namespace RalphMchugh2263Pj7
 
         }
 
+        private void buildTreeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+            BinaryTreeNode headOfTree = new BinaryTreeNode("0");
+            for(int i = 1; i <= 10000; i++) {
+                headOfTree.InsertValIntoSubTree(rand.Next(50000).ToString());
+            }
+        }
+
         // Test case is 10k size with range from 0 to 50k cast to strings
         // what is the min/max depth of the resulting tree
         // sort and "regenerate" What happens? 
