@@ -101,6 +101,33 @@ namespace RalphMchugh2263Pj7
                 }
             }
         }
+
+        /* Ralph Liam McHugh 11/6/2023
+         * follows the same logic as the insertVal function above but does it with a node instead
+         */
+        public void insert(BinaryTreeNode node)
+        {
+            // call find first to see if the node is in the tree already
+            if (true)
+            {
+                if (Convert.ToInt32(node.nodeValue) < Convert.ToInt32(nodeValue))
+                {
+                    if (leftTree == null) { leftTree = node; }
+                    leftTree.insert(node);
+                }
+                else if (Convert.ToInt32(node.nodeValue) > Convert.ToInt32(nodeValue))
+                {
+                    if (rightTree == null) { rightTree = node; }
+                    rightTree.insert(node);
+                }
+            }
+        }
+
+
+
+
+
+
         /******************************************************************************
         * IsValInSubTree returns true iff Value in tree. 
         ********************************************************************************/
@@ -144,11 +171,6 @@ namespace RalphMchugh2263Pj7
         
         public string getStringOfAllInfixValues() { return ""; }
         
-        /* Ralph Liam McHugh
-         */
-        public void insert(BinaryTreeNode node){
-            // calls the find function to ensure no duplicates
-         }
         
         /* Ralph Liam McHugh - 11/6/2023
          * this will recurse the left side down to the min value then return
