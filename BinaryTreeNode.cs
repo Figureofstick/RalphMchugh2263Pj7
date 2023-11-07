@@ -23,6 +23,7 @@ namespace RalphMchugh2263Pj7
         {
             InsertValIntoSubTree(s1);
         }
+
         // I made an empty constructor so that the insertVal can be less of a pain
         // as of writing this comment I am not sure how it will work out - RLM
         public BinaryTreeNode() { }
@@ -43,14 +44,37 @@ namespace RalphMchugh2263Pj7
         *  outline of a infix traversal of the tree using indentation to indicate level 
         * as shown in the example provided.
         ********************************************************************/
+
+        // Ralph Liam McHugh 11/6/2023 
+        // I didn't like how it was set up originally with the (int treeLevel) so I changed it to 
+        // do it with BinaryTreeNodes 
+        // also when I say I didn't like it, I couldn't actually figure out how to do it
+        
         public string GetInfixSubTreeString()
         { //dummy recursion initiation
-            return GetInfixSubTreeString(0);
+            return GetInfixSubTreeString(this);
         }
 
-        private string GetInfixSubTreeString(int treeLevel)
+        private string GetInfixSubTreeString(BinaryTreeNode currentNode)
         {
-            return "";
+            if(currentNode == null) { return ""; }
+            else
+            {
+                string left = GetInfixSubTreeString(currentNode.leftTree);
+                string middle = currentNode.nodeValue;
+                string right = GetInfixSubTreeString(currentNode.rightTree);
+                
+                // Check if left or right subtree is non-empty to decide whether to add delimiter
+                if (left != "" && right != "")
+                    return left + ", " + middle + ", " + right;
+                else if (left != "")
+                    return left + ", " + middle + right;
+                else if (right != "")
+                    return left + middle + ", " + right;
+                else 
+                    return middle;
+
+            }
         }
 
 
@@ -109,43 +133,74 @@ namespace RalphMchugh2263Pj7
         /* Ralph Liam McHugh
          */
 
-        //public BinaryTreeNode find(int lookup) { }
+        public BinaryTreeNode find(int lookup) { return this; }
         
 
         /* Ralph Liam McHugh
          */
-        //public BinaryTreeNode findPredecessor(int lookup) { }
+        public BinaryTreeNode findPredecessor(int lookup) { return this; }
         /* Ralph Liam McHugh
          */
-        //public string getStringOfAllInfixValues() { }
-        /* Ralph Liam McHugh
-         */
-        //public void insert(BinaryTreeNode node){// calls the find function to ensure no duplicates}
+        
+        public string getStringOfAllInfixValues() { return ""; }
         
         /* Ralph Liam McHugh
          */
-        //public BinaryTreeNode minVal(){// this will recurse the left side down to the first value then return}
+        public void insert(BinaryTreeNode node){
+            // calls the find function to ensure no duplicates
+         }
+        
+        /* Ralph Liam McHugh - 11/6/2023
+         * this will recurse the left side down to the min value then return
+         * Binary Search trees are inherently sorted so this should always be the minimum value
+         */
+        public BinaryTreeNode minVal(BinaryTreeNode node){
+                // are you at the left most leaf yet? if yes return node
+                if (node.leftTree == null) { return node; }
+                // if you aren't keep going
+                else { return minVal(node.leftTree); }
+            
+            }
+        
+         /* Ralph Liam McHugh - 11/6/2023
+          * this will recurse the right side to the maximum value then return
+          * Binary Search Trees are inherently sorted so this should always be the minimum value
+         */
+        public BinaryTreeNode maxVal(BinaryTreeNode node) {
+                // are you at the right most leaf yet? if yes return node
+                if (node.rightTree == null) { return node; }
+                // if you aren't keep going
+                else { return maxVal(node.rightTree); }
+
+        }
+
+
+        /* Ralph Liam McHugh
+        */
+        public void delete(BinaryTreeNode node){
+            // Calls the find function
+        }
+        
+                
+                
         /* Ralph Liam McHugh
          */
-        //public BinaryTreeNode maxVal() { // this will recurse the right side down to the last value then return}
-        /* Ralph Liam McHugh
-         */
-        //public void delete(BinaryTreeNode node){// Calls the find function}
-        /* Ralph Liam McHugh
-         */
-        //public BinaryTreeNode setUnion() { }
+        public BinaryTreeNode setUnion() { return this; }
         
         /* Ralph Liam McHugh
          */
         public int minDepth() {
             //if()
-        
-        
+
+            return 0;
         }
         
         /* Ralph Liam McHugh
          */
-        public int maxDepth() { }
+        public int maxDepth() {
+            return 1;
+
+        }
 
 
 
