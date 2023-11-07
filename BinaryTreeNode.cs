@@ -134,12 +134,18 @@ namespace RalphMchugh2263Pj7
         /* Ralph Liam McHugh
          */
         //public BinaryTreeNode setUnion() { }
+        
         /* Ralph Liam McHugh
          */
-        //public int minDepth() { }
+        public int minDepth() {
+            //if()
+        
+        
+        }
+        
         /* Ralph Liam McHugh
          */
-        //public int maxDepth() { }
+        public int maxDepth() { }
 
 
 
