@@ -162,21 +162,41 @@ namespace RalphMchugh2263Pj7
             else { return find(node.leftTree)}
         }
 
+        /* Ralph Liam McHugh 11/8/2023
+         * This function finds the parent node of the node given
+         * which wasn't in the project writeup but makes the delete function 
+         * way easier for some of deletion cases.
+         */
+        public BinaryTreeNode findParent(BinaryTreeNode node, int lookup)
+        {
+            // if the node entered is null, return null
+            if (node == null) { return null; }
+            // if the node is the parent node of the lookup, return that node
+            else if (Convert.ToInt32(node.leftTree.nodeValue) == lookup || Convert.ToInt32(node.rightTree.nodeValue) == lookup) { return node; }
+            // if that node is less than lookup, go through the right path
+            else if (Convert.ToInt32(node.nodeValue) < lookup) { return findParent(node.rightTree, lookup)}
+            // if that node is greater than lookup, go through the left path
+            else { return findParent(node.leftTree)}
+        }
 
         /* Ralph Liam McHugh 11/8/2023
-         * Pseudo code off wikipedia
-        BST-Predecessor(x)
-            if x.left ≠ NIL then
-            return BST-Maximum(x.left)
-            end if
-            y := x.parent
-            while y ≠ NIL and x = y.left do 
-            x := y 
-            y := y.parent
-            repeat
-            return y
+         * This code finds the infix order predecessor node of the node given and returns it
+         * it does this by going to the largest value node in the tree to the left of the node given
+         * not to be confused with findParent which is a different function
          */
-        public BinaryTreeNode findPredecessor(int lookup) { return this; }
+        public BinaryTreeNode findPredecessor(BinaryTreeNode node) {
+            
+            if(node.leftTree == null) { return null; } // no predecessor for the node given
+            else
+            {   // go to the largest possible value node in the tree left of the node given
+                node = node.leftTree;
+                while(node != null)
+                {
+                    node = node.rightTree;
+                }
+                return node;
+            }
+        }
         
         /* Ralph Liam McHugh - 11/6/2023
          * this will recurse the left side down to the min value then return
@@ -203,19 +223,63 @@ namespace RalphMchugh2263Pj7
         }
 
 
-        /* Ralph Liam McHugh
+        /* Ralph Liam McHugh 11/8/2023
+         * this function finds the node given and then 
+         * re-attaches any children it has after removing it
         */
         public void delete(BinaryTreeNode node){
-            // Calls the find function
+            
+            // is the node given a leaf node? if so just set it's place in the parent equal to null
+            if(node.leftTree == null && node.rightTree == null) 
+            {
+                // if the parent's left tree is the node, set it to null
+                if (findParent(this, Convert.ToInt32(node.nodeValue)).leftTree == node) { findParent(this, Convert.ToInt32(node.nodeValue)) = null; }
+                // if the parent's right tree is the node, set it to null
+                else if (findParent(this, Convert.ToInt32(node.nodeValue)).rightree == node) { findParent(this, Convert.ToInt32(node.nodeValue)) = null; }
+                
+            }
+            // if the node given only has one child, append it to the parent of the node given
+            else if(node.leftTree != null ^ node.rightTree != null ) {
+                // store the child node
+                BinaryTreeNode stored;
+                if(node.leftTree != null){ stored = node.leftTree; }
+                else { stored = node.rightTree; }
+
+                // if the parent's left tree is the node, set it to the stored child
+                if (findParent(this, Convert.ToInt32(node.nodeValue)).leftTree == node) { findParent(this, Convert.ToInt32(node.nodeValue)) = stored; }
+                // if the parent's right tree is the node, set it to the stored child
+                else if (findParent(this, Convert.ToInt32(node.nodeValue)).rightree == node) { findParent(this, Convert.ToInt32(node.nodeValue)) = stored; }
+
+            }
+            /* if the node given has two children, then figure out which situation to place them in
+                    situation 1. replace the node you are deleting with one of the children 
+                                 so the parent of the node points to one child and the other child is a child of that
+
+                    situation 2. 
+             */
+            else if(node.leftTree != null && node.rightTree != null)
+            {
+
+            }
         }
 
         /******************************************************************************
        * DeleteValFromSubTree locates and deletes Value from tree. returns true iff
        * Value in tree. 
+       * Ralph Liam McHugh 11/8/2023
        ********************************************************************************/
         public Boolean DeleteValFromSubTree(string s)
         {
-            return true;
+            // the value you told me to delete wasn't in the tree to begin with
+            if (!IsValInSubTree(s)) { return false; }
+            // the value must be in the tree or you wouldn't be this far in the code
+            else
+            {   // pass the value to delete function and return true
+                delete(find(this, Convert.ToInt32(s)));
+                return true;
+            }
+           
+
         }
 
         /* Ralph Liam McHugh 11/8/2023
@@ -241,7 +305,6 @@ namespace RalphMchugh2263Pj7
         /* Ralph Liam McHugh 11/8/2023
          * Finds the minimum depth to get to a leaf in the tree
          * returns the depth as an int 
-         * 
          */
         public int minDepth(BinaryTreeNode node, int d) {
             // d as in depth
