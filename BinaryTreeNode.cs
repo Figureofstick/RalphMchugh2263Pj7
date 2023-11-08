@@ -147,14 +147,7 @@ namespace RalphMchugh2263Pj7
             // left tree and right tree didn't have it, return false
             else { return false; }
         }
-        /******************************************************************************
-        * DeleteValFromSubTree locates and deletes Value from tree. returns true iff
-        * Value in tree. 
-        ********************************************************************************/
-        public Boolean DeleteValFromSubTree(string s)
-        {
-            return true;
-        }
+       
 
 
         /* Ralph Liam McHugh
@@ -202,9 +195,16 @@ namespace RalphMchugh2263Pj7
         public void delete(BinaryTreeNode node){
             // Calls the find function
         }
-        
-                
-                
+        /******************************************************************************
+       * DeleteValFromSubTree locates and deletes Value from tree. returns true iff
+       * Value in tree. 
+       ********************************************************************************/
+        public Boolean DeleteValFromSubTree(string s)
+        {
+            return true;
+        }
+
+
         /* Ralph Liam McHugh
          */
         public BinaryTreeNode setUnion() { return this; }
