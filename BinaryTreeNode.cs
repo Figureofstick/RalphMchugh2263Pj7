@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,24 +47,29 @@ namespace RalphMchugh2263Pj7
         ********************************************************************/
 
         // Ralph Liam McHugh 11/6/2023 
-        // I didn't like how it was set up originally with the (int treeLevel) so I changed it to 
-        // do it with BinaryTreeNodes 
-        // also when I say I didn't like it, I couldn't actually figure out how to do it
+        
         
         public string GetInfixSubTreeString()
         { //dummy recursion initiation
-            return GetInfixSubTreeString(this);
+            return GetInfixSubTreeString(0);
         }
 
-        private string GetInfixSubTreeString(BinaryTreeNode currentNode)
+        private string GetInfixSubTreeString(int treelevel)
         {
-            if(currentNode == null) { return ""; }
+            
+        }
+
+        /* Ralph Liam McHugh 11/8/2023
+         * This returns a string of all the values in infix order with a comma to delimit them
+         */
+        public string getStringOfAllInfixValues(BinaryTreeNode currentNode) {
+            if (currentNode == null) { return ""; }
             else
             {
                 string left = GetInfixSubTreeString(currentNode.leftTree);
                 string middle = currentNode.nodeValue;
                 string right = GetInfixSubTreeString(currentNode.rightTree);
-                
+
                 // Check if left or right subtree is non-empty to decide whether to add delimiter
                 if (left != "" && right != "")
                     return left + ", " + middle + ", " + right;
@@ -71,11 +77,12 @@ namespace RalphMchugh2263Pj7
                     return left + ", " + middle + right;
                 else if (right != "")
                     return left + middle + ", " + right;
-                else 
+                else
                     return middle;
-
             }
+
         }
+
 
 
         /******************************************************************************
@@ -147,22 +154,45 @@ namespace RalphMchugh2263Pj7
             // left tree and right tree didn't have it, return false
             else { return false; }
         }
-       
 
 
-        /* Ralph Liam McHugh
+
+        /* Ralph Liam McHugh 11/8/2023
+         * This is a recursive find function
+         * you enter it with the root node and the lookup 
          */
 
-        public BinaryTreeNode find(int lookup) { return this; }
-        
+        public BinaryTreeNode find(BinaryTreeNode node, int lookup) 
+        {
+            // if the node entered is null, return null
+            if(node == null) { return null; }
+            // if the node is the same as what you wanted, return that node
+            else if(Convert.ToInt32(node.nodeValue) == lookup)) { return node; }
+            // if that node is less than lookup, go through the right path
+            else if(Convert.ToInt32(node.nodeValue) < lookup) { return find(node.rightTree, lookup)}
+            // if that node is greater than lookup, go through the left path
+            else { return find(node.leftTree)}
+        }
 
-        /* Ralph Liam McHugh
+
+        /* Ralph Liam McHugh 11/8/2023
+         * Pseudo code off wikipedia
+        BST-Predecessor(x)
+            if x.left ≠ NIL then
+            return BST-Maximum(x.left)
+            end if
+            y := x.parent
+            while y ≠ NIL and x = y.left do 
+            x := y 
+            y := y.parent
+            repeat
+            return y
          */
         public BinaryTreeNode findPredecessor(int lookup) { return this; }
-        /* Ralph Liam McHugh
-         */
         
-        public string getStringOfAllInfixValues() { return ""; }
+        
+        
+        
         
         
         /* Ralph Liam McHugh - 11/6/2023
@@ -205,14 +235,29 @@ namespace RalphMchugh2263Pj7
         }
 
 
-        /* Ralph Liam McHugh
+        /* Ralph Liam McHugh 11/8/2023
+         * this function combines the two nodes, it runs through the secondNode, plucking values off and inserting them into 
+         * firstNode. Since insertion is inherently sorted, it works great
+         * it does this by passing the node ref, not the value ref so I figured it worked for the assignment
+         * 
          */
-        public BinaryTreeNode setUnion() { return this; }
+        public BinaryTreeNode setUnion(BinaryTreeNode firstNode, BinaryTreeNode secondNode) {
+            while (secondNode != null)
+            {
+
+            }
+
+
+
+
+
+
+            return firstNode;
+        }
         
         /* Ralph Liam McHugh
          */
         public int minDepth() {
-            //if()
 
             return 0;
         }
