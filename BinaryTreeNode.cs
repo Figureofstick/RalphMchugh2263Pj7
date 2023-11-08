@@ -12,7 +12,7 @@ namespace RalphMchugh2263Pj7
  *  the overall tree as the tree is a node is a tree. Inserts in alphabetical order.
 *  ********************************************************************************/
 
-    // Written after receiving for an assignment 11/5/2023 by Ralph Liam McHugh
+    // Started writing after receiving for an assignment 11/5/2023 by Ralph Liam McHugh
 
     internal class BinaryTreeNode
     {
@@ -47,8 +47,6 @@ namespace RalphMchugh2263Pj7
         ********************************************************************/
 
         // Ralph Liam McHugh 11/6/2023 
-        
-        
         public string GetInfixSubTreeString()
         { //dummy recursion initiation
             return GetInfixSubTreeString(0);
@@ -82,8 +80,6 @@ namespace RalphMchugh2263Pj7
             }
 
         }
-
-
 
         /******************************************************************************
         * InsertValIntoSubTree
@@ -130,11 +126,6 @@ namespace RalphMchugh2263Pj7
             }
         }
 
-
-
-
-
-
         /******************************************************************************
         * IsValInSubTree returns true iff Value in tree. 
         ********************************************************************************/
@@ -155,13 +146,10 @@ namespace RalphMchugh2263Pj7
             else { return false; }
         }
 
-
-
         /* Ralph Liam McHugh 11/8/2023
          * This is a recursive find function
          * you enter it with the root node and the lookup 
          */
-
         public BinaryTreeNode find(BinaryTreeNode node, int lookup) 
         {
             // if the node entered is null, return null
@@ -189,11 +177,6 @@ namespace RalphMchugh2263Pj7
             return y
          */
         public BinaryTreeNode findPredecessor(int lookup) { return this; }
-        
-        
-        
-        
-        
         
         /* Ralph Liam McHugh - 11/6/2023
          * this will recurse the left side down to the min value then return
@@ -225,6 +208,7 @@ namespace RalphMchugh2263Pj7
         public void delete(BinaryTreeNode node){
             // Calls the find function
         }
+
         /******************************************************************************
        * DeleteValFromSubTree locates and deletes Value from tree. returns true iff
        * Value in tree. 
@@ -233,7 +217,6 @@ namespace RalphMchugh2263Pj7
         {
             return true;
         }
-
 
         /* Ralph Liam McHugh 11/8/2023
          * this function combines the two nodes, it runs through the secondNode, plucking values off and inserting them into 
@@ -255,21 +238,48 @@ namespace RalphMchugh2263Pj7
             return firstNode;
         }
         
-        /* Ralph Liam McHugh
+        /* Ralph Liam McHugh 11/8/2023
+         * Finds the minimum depth to get to a leaf in the tree
+         * returns the depth as an int 
+         * 
          */
-        public int minDepth() {
+        public int minDepth(BinaryTreeNode node, int d) {
+            // d as in depth
+            
+            // did you feed me nothing? if so it's a depth of zero
+            if(node == null) { return 0; }
+            // are you at a leaf? return the depth of that leaf
+            if(node.leftTree == null && node.rightTree == null){ return d; }
+            // there is still a branch on the right, check the depth
+            if(node.leftTree == null) { return minDepth(node.rightTree, d += 1); }
+            // there is still a branch on the left, check the depth
+            if(node.rightTree == null) { return minDepth(node.leftTree, d += 1);  }
 
-            return 0;
+            // give me the minimum between the left and the right 
+            return Math.Min(minDepth(node.leftTree, d +=1 ), minDepth(node.rightTree, d += 1));
+           
         }
         
-        /* Ralph Liam McHugh
+        /* Ralph Liam McHugh 11/8/2023
+         * Finds the maximum depth to get to a leaf in the tree
+         * returns the depth as an int
          */
         public int maxDepth() {
-            return 1;
+            // d as in depth
+
+            // did you feed me nothing? if so it's a depth of zero
+            if (node == null) { return 0; }
+            // are you at a leaf? return the depth of that leaf
+            if (node.leftTree == null && node.rightTree == null) { return d; }
+            // there is still a branch on the right, check the depth
+            if (node.leftTree == null) { return minDepth(node.rightTree, d += 1); }
+            // there is still a branch on the left, check the depth
+            if (node.rightTree == null) { return minDepth(node.leftTree, d += 1); }
+
+            // give me the minimum between the left and the right 
+            return Math.Max(minDepth(node.leftTree, d += 1), minDepth(node.rightTree, d += 1));
 
         }
-
-
 
     }
 }
