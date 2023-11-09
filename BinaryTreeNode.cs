@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
@@ -19,15 +20,21 @@ namespace RalphMchugh2263Pj7
         private string nodeValue = "";
         protected BinaryTreeNode? rightTree = null;
         protected BinaryTreeNode? leftTree = null;
+        protected int depth; 
 
-        public BinaryTreeNode(string s1)
+        // only called the first time.
+        public BinaryTreeNode(string s1, int d)
         {
             InsertValIntoSubTree(s1);
+            depth = d;
         }
 
         // I made an empty constructor so that the insertVal can be less of a pain
         // as of writing this comment I am not sure how it will work out - RLM
-        public BinaryTreeNode() { }
+        public BinaryTreeNode(int d) {
+            depth = d;
+            
+        }
 
 
         /************************************************
@@ -48,12 +55,42 @@ namespace RalphMchugh2263Pj7
 
         // Ralph Liam McHugh 11/6/2023 
         public string GetInfixSubTreeString()
-        { //dummy recursion initiation
-            return GetInfixSubTreeString(0);
+        {
+            // recursion initiation
+            // [maxDepth][maxDepth*2]
+            List<List<string>> treeArray = new List<List<string>>();
+            GetInfixSubTreeString(treeArray, 0, this);
+            string treeString = "";
+            for (int i = 0; i < treeArray.Count; i += 1)
+            {
+                for(int j = 0; j < treeArray[i].Count; j += 1)
+                {
+                    treeString += treeArray[i][j];
+                }
+                treeString += "\r\n";
+            }
+
+
+            return treeString;
         }
 
-        private string GetInfixSubTreeString(int treelevel)
-        {
+        private void GetInfixSubTreeString(List<List<string>> treeArray, int treeLevel, BinaryTreeNode node)
+        {   
+            // if you are outside the bounds of the tree don't do anything
+            if(treeLevel > maxDepth(this, 0)) { }
+            else
+            {
+                // if the tree level isn't in the list of lists already 
+                if(treeArray.Count < treeLevel) { treeArray.Add(new List<string>()); }
+                treeArray[treeLevel].Add(node.nodeValue);
+
+                // go down the left tree from here and 
+                if (node.leftTree != null) { GetInfixSubTreeString(treeArray, treeLevel + 1, node.leftTree); } 
+                if(node.rightTree != null) { GetInfixSubTreeString(treeArray, treeLevel + 1, node.rightTree); }
+                
+                
+            }
+            
             
         }
 
@@ -64,9 +101,9 @@ namespace RalphMchugh2263Pj7
             if (currentNode == null) { return ""; }
             else
             {
-                string left = GetInfixSubTreeString(currentNode.leftTree);
+                string left = getStringOfAllInfixValues(currentNode.leftTree);
                 string middle = currentNode.nodeValue;
-                string right = GetInfixSubTreeString(currentNode.rightTree);
+                string right = getStringOfAllInfixValues(currentNode.rightTree);
 
                 // Check if left or right subtree is non-empty to decide whether to add delimiter
                 if (left != "" && right != "")
@@ -92,16 +129,10 @@ namespace RalphMchugh2263Pj7
         {
             if(nodeValue == "") { nodeValue = s; }
             if (!IsValInSubTree(s)) {
-                if (Convert.ToInt32(s) < Convert.ToInt32(nodeValue))
-                {
-                    if (leftTree == null) { leftTree = new BinaryTreeNode(); }
-                    leftTree.InsertValIntoSubTree(s);
-                }
-                else if(Convert.ToInt32(s) > Convert.ToInt32(nodeValue)){
-                    if(rightTree == null) {  rightTree = new BinaryTreeNode(); }
-                    rightTree.InsertValIntoSubTree(s);
-
-                }
+                BinaryTreeNode newNode = new BinaryTreeNode(0);
+                newNode.nodeValue = s;
+                insert(newNode);
+                
             }
         }
 
@@ -109,18 +140,19 @@ namespace RalphMchugh2263Pj7
          * follows the same logic as the insertVal function above but does it with a node instead
          */
         public void insert(BinaryTreeNode node)
-        {
-            // call find first to see if the node is in the tree already
-            if (true)
+        {   
+            if (!IsValInSubTree(node.nodeValue)) // its not in the tree right?
             {
                 if (Convert.ToInt32(node.nodeValue) < Convert.ToInt32(nodeValue))
                 {
                     if (leftTree == null) { leftTree = node; }
+                    node.depth += 1;
                     leftTree.insert(node);
                 }
                 else if (Convert.ToInt32(node.nodeValue) > Convert.ToInt32(nodeValue))
                 {
                     if (rightTree == null) { rightTree = node; }
+                    node.depth += 1;
                     rightTree.insert(node);
                 }
             }
@@ -153,13 +185,14 @@ namespace RalphMchugh2263Pj7
         public BinaryTreeNode find(BinaryTreeNode node, int lookup) 
         {
             // if the node entered is null, return null
-            if(node == null) { return null; }
+            if (node == null) { return null; }
             // if the node is the same as what you wanted, return that node
-            else if(Convert.ToInt32(node.nodeValue) == lookup)) { return node; }
+            else if (Convert.ToInt32(node.nodeValue) == lookup){ return node; }
+
             // if that node is less than lookup, go through the right path
-            else if(Convert.ToInt32(node.nodeValue) < lookup) { return find(node.rightTree, lookup)}
+            else if(Convert.ToInt32(node.nodeValue) < lookup) { return find(node.rightTree, lookup);  }
             // if that node is greater than lookup, go through the left path
-            else { return find(node.leftTree)}
+            else { return find(node.leftTree, lookup);  }
         }
 
         /* Ralph Liam McHugh 11/8/2023
@@ -174,9 +207,9 @@ namespace RalphMchugh2263Pj7
             // if the node is the parent node of the lookup, return that node
             else if (Convert.ToInt32(node.leftTree.nodeValue) == lookup || Convert.ToInt32(node.rightTree.nodeValue) == lookup) { return node; }
             // if that node is less than lookup, go through the right path
-            else if (Convert.ToInt32(node.nodeValue) < lookup) { return findParent(node.rightTree, lookup)}
+            else if (Convert.ToInt32(node.nodeValue) < lookup) { return findParent(node.rightTree, lookup); }
             // if that node is greater than lookup, go through the left path
-            else { return findParent(node.leftTree)}
+            else { return findParent(node.leftTree, lookup); }
         }
 
         /* Ralph Liam McHugh 11/8/2023
@@ -235,7 +268,7 @@ namespace RalphMchugh2263Pj7
                 // if the parent's left tree is the node, set it to null
                 if (findParent(this, Convert.ToInt32(node.nodeValue)).leftTree == node) { findParent(this, Convert.ToInt32(node.nodeValue)) = null; }
                 // if the parent's right tree is the node, set it to null
-                else if (findParent(this, Convert.ToInt32(node.nodeValue)).rightree == node) { findParent(this, Convert.ToInt32(node.nodeValue)) = null; }
+                else if (findParent(this, Convert.ToInt32(node.nodeValue)).rightTree == node) { findParent(this, Convert.ToInt32(node.nodeValue)) = null; }
                 
             }
             // if the node given only has one child, append it to the parent of the node given
@@ -248,7 +281,7 @@ namespace RalphMchugh2263Pj7
                 // if the parent's left tree is the node, set it to the stored child
                 if (findParent(this, Convert.ToInt32(node.nodeValue)).leftTree == node) { findParent(this, Convert.ToInt32(node.nodeValue)) = stored; }
                 // if the parent's right tree is the node, set it to the stored child
-                else if (findParent(this, Convert.ToInt32(node.nodeValue)).rightree == node) { findParent(this, Convert.ToInt32(node.nodeValue)) = stored; }
+                else if (findParent(this, Convert.ToInt32(node.nodeValue)).rightTree == node) { findParent(this, Convert.ToInt32(node.nodeValue)) = stored; }
 
             }
             /* if the node given has two children, then figure out which situation to place them in
@@ -278,8 +311,6 @@ namespace RalphMchugh2263Pj7
                 delete(find(this, Convert.ToInt32(s)));
                 return true;
             }
-           
-
         }
 
         /* Ralph Liam McHugh 11/8/2023
@@ -289,6 +320,9 @@ namespace RalphMchugh2263Pj7
          * 
          */
         public BinaryTreeNode setUnion(BinaryTreeNode firstNode, BinaryTreeNode secondNode) {
+            // pick closest to middle of value set (eg 25000)
+            
+            
             while (secondNode != null)
             {
 
@@ -327,7 +361,7 @@ namespace RalphMchugh2263Pj7
          * Finds the maximum depth to get to a leaf in the tree
          * returns the depth as an int
          */
-        public int maxDepth() {
+        public int maxDepth(BinaryTreeNode node, int d) {
             // d as in depth
 
             // did you feed me nothing? if so it's a depth of zero
@@ -341,8 +375,6 @@ namespace RalphMchugh2263Pj7
 
             // give me the minimum between the left and the right 
             return Math.Max(minDepth(node.leftTree, d += 1), minDepth(node.rightTree, d += 1));
-
         }
-
     }
 }
