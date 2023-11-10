@@ -37,6 +37,9 @@ namespace RalphMchugh2263Pj7
             
         }
 
+        // getter function to avoid unprivatizing the nodeValue string
+        public string value(BinaryTreeNode node) { return node.nodeValue; }
+
 
         /************************************************
         * Splat(int x) returns a string of splats of length x

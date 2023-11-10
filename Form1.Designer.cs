@@ -57,6 +57,7 @@
             btnBuildTree.TabIndex = 0;
             btnBuildTree.Text = "Build Tree";
             btnBuildTree.UseVisualStyleBackColor = true;
+            btnBuildTree.Click += btnBuildTree_Click;
             // 
             // btnFindNode
             // 
@@ -66,6 +67,7 @@
             btnFindNode.TabIndex = 1;
             btnFindNode.Text = "Find Node";
             btnFindNode.UseVisualStyleBackColor = true;
+            btnFindNode.Click += btnFindNode_Click;
             // 
             // btnCheckVal
             // 
@@ -75,6 +77,7 @@
             btnCheckVal.TabIndex = 2;
             btnCheckVal.Text = "Is the value in the (sub)tree?";
             btnCheckVal.UseVisualStyleBackColor = true;
+            btnCheckVal.Click += btnCheckVal_Click;
             // 
             // btnMinDepth
             // 
@@ -84,6 +87,7 @@
             btnMinDepth.TabIndex = 3;
             btnMinDepth.Text = "Min Depth";
             btnMinDepth.UseVisualStyleBackColor = true;
+            btnMinDepth.Click += btnMinDepth_Click;
             // 
             // btnMaxVal
             // 
@@ -93,6 +97,7 @@
             btnMaxVal.TabIndex = 4;
             btnMaxVal.Text = "Max Value";
             btnMaxVal.UseVisualStyleBackColor = true;
+            btnMaxVal.Click += btnMaxVal_Click;
             // 
             // btnMinVal
             // 
@@ -102,6 +107,7 @@
             btnMinVal.TabIndex = 5;
             btnMinVal.Text = "Min Value";
             btnMinVal.UseVisualStyleBackColor = true;
+            btnMinVal.Click += btnMinVal_Click;
             // 
             // txtBoxBuildTreeIn
             // 
@@ -119,6 +125,7 @@
             btnMaxDepth.TabIndex = 7;
             btnMaxDepth.Text = "Max Depth";
             btnMaxDepth.UseVisualStyleBackColor = true;
+            btnMaxDepth.Click += btnMaxDepth_Click;
             // 
             // btnInfixString
             // 
@@ -128,6 +135,7 @@
             btnInfixString.TabIndex = 8;
             btnInfixString.Text = "Infix String of Values";
             btnInfixString.UseVisualStyleBackColor = true;
+            btnInfixString.Click += btnInfixString_Click;
             // 
             // btnSubTree
             // 
@@ -137,6 +145,7 @@
             btnSubTree.TabIndex = 9;
             btnSubTree.Text = "(Ugly) String of Values ";
             btnSubTree.UseVisualStyleBackColor = true;
+            btnSubTree.Click += btnSubTree_Click;
             // 
             // lblMaxValOut
             // 
@@ -206,6 +215,7 @@
             btnInsertVal.TabIndex = 17;
             btnInsertVal.Text = "Insert Value";
             btnInsertVal.UseVisualStyleBackColor = true;
+            btnInsertVal.Click += btnInsertVal_Click;
             // 
             // txtBoxInsertValIn
             // 
