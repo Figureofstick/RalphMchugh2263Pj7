@@ -45,6 +45,8 @@
             txtBoxFindNodeIn = new TextBox();
             txtBoxCheckValIn = new TextBox();
             rTxtBoxOutput = new RichTextBox();
+            btnInsertVal = new Button();
+            txtBoxInsertValIn = new TextBox();
             SuspendLayout();
             // 
             // btnBuildTree
@@ -196,11 +198,30 @@
             rTxtBoxOutput.TabIndex = 16;
             rTxtBoxOutput.Text = "Click one of the string buttons";
             // 
+            // btnInsertVal
+            // 
+            btnInsertVal.Location = new Point(275, 26);
+            btnInsertVal.Name = "btnInsertVal";
+            btnInsertVal.Size = new Size(75, 23);
+            btnInsertVal.TabIndex = 17;
+            btnInsertVal.Text = "Insert Value";
+            btnInsertVal.UseVisualStyleBackColor = true;
+            // 
+            // txtBoxInsertValIn
+            // 
+            txtBoxInsertValIn.Location = new Point(370, 26);
+            txtBoxInsertValIn.Name = "txtBoxInsertValIn";
+            txtBoxInsertValIn.Size = new Size(100, 23);
+            txtBoxInsertValIn.TabIndex = 18;
+            txtBoxInsertValIn.Text = "Tree Size Input";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(txtBoxInsertValIn);
+            Controls.Add(btnInsertVal);
             Controls.Add(rTxtBoxOutput);
             Controls.Add(txtBoxCheckValIn);
             Controls.Add(txtBoxFindNodeIn);
@@ -244,5 +265,7 @@
         private TextBox txtBoxFindNodeIn;
         private TextBox txtBoxCheckValIn;
         private RichTextBox rTxtBoxOutput;
+        private Button btnInsertVal;
+        private TextBox txtBoxInsertValIn;
     }
 }

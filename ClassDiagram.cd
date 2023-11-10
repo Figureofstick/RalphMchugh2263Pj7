@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="The BinaryTreeNode class is a self-referential class that resembles a Binary Search Tree when traversing its leftTree and rightTree nodes. &#xD;&#xA;&#xD;&#xA;Since this class diagraming tool won't let me put any arrows or other classes in without actually making the class files with weird get/set functions, I am going to describe the relationship this class has to itself.&#xD;&#xA;&#xD;&#xA;The &quot;root&quot; binary tree node is the first node instantiated somewhere else in code and it's methods work on all the nodes under it in the leftTree and rightTree fields. &#xD;&#xA;&#xD;&#xA;leftTree and rightTree are also BinaryTreeNodes but they are not called except by functions called at the &quot;root&quot; BinaryTreeNode&#xD;&#xA;&#xD;&#xA;">
+    <Position X="11.85" Y="0.618" Height="3.2" Width="4.203" />
+  </Comment>
+  <Class Name="RalphMchugh2263Pj7.BinaryTreeNode">
+    <Position X="7" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgABAAACAAAAAEAwAAEAgABBAGBAAKAAgQgA=</HashCode>
+      <FileName>BinaryTreeNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
