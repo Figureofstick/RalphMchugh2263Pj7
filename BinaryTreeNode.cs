@@ -5,6 +5,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace RalphMchugh2263Pj7
 {
@@ -53,45 +54,53 @@ namespace RalphMchugh2263Pj7
         * as shown in the example provided.
         ********************************************************************/
 
-        // Ralph Liam McHugh 11/6/2023 
+        // Ralph Liam McHugh 11/9/2023
+        // This function returns a string of the whole tree as a funky 
+        // multi line string that is somewhat resembling a conceptual btree
+        // fun fact : it works, it just looks like trash because I didn't have time to figure out alignment
         public string GetInfixSubTreeString()
         {
-            // recursion initiation
-            // [maxDepth][maxDepth*2]
+            // this should really be treeList, too busy for a refactor
             List<List<string>> treeArray = new List<List<string>>();
-            GetInfixSubTreeString(treeArray, 0, this);
+
+            // add lists of strings at each depth to the list of lists
+            for(int i = 0; i <= maxDepth(this); i += 1) { treeArray.Add(new List<string>()); }
+            
+            // recursion initiation
+            GetInfixSubTreeString(treeArray, this);
             string treeString = "";
+
+            // builds a string from the list of lists
             for (int i = 0; i < treeArray.Count; i += 1)
             {
+                treeString += Splat(i);
                 for(int j = 0; j < treeArray[i].Count; j += 1)
                 {
-                    treeString += treeArray[i][j];
+                    treeString += treeArray[i][j] + " " + Splat(i) + " ";
                 }
                 treeString += "\r\n";
             }
-
-
             return treeString;
         }
 
-        private void GetInfixSubTreeString(List<List<string>> treeArray, int treeLevel, BinaryTreeNode node)
-        {   
-            // if you are outside the bounds of the tree don't do anything
-            if(treeLevel > maxDepth(this, 0)) { }
-            else
-            {
-                // if the tree level isn't in the list of lists already 
-                if(treeArray.Count < treeLevel) { treeArray.Add(new List<string>()); }
-                treeArray[treeLevel].Add(node.nodeValue);
 
-                // go down the left tree from here and 
-                if (node.leftTree != null) { GetInfixSubTreeString(treeArray, treeLevel + 1, node.leftTree); } 
-                if(node.rightTree != null) { GetInfixSubTreeString(treeArray, treeLevel + 1, node.rightTree); }
-                
-                
-            }
-            
-            
+        // Ralph Liam McHugh 11/9/2023
+        // this function is a recursive list of lists builder
+        // it should really be called buildBinaryTreeAsListOfLists or something 
+        // but I am really out of time to start refactoring
+        // because I actually wasn't really taught refactoring in this class
+        // instead I was taught about 18th century literature and cars 
+        // which I am still mad about
+        private void GetInfixSubTreeString(List<List<string>> treeArray, BinaryTreeNode node)
+        {    
+                // put the node you are at in the correct section
+                treeArray[node.depth].Add(node.nodeValue);
+
+                // go down the left tree from here and put those values in the list where they go
+                if (node.leftTree != null) { GetInfixSubTreeString(treeArray, node.leftTree); } 
+
+                // go down the right tree from here and put those values in the list where they go
+                if(node.rightTree != null) { GetInfixSubTreeString(treeArray, node.rightTree); }
         }
 
         /* Ralph Liam McHugh 11/8/2023
@@ -129,8 +138,10 @@ namespace RalphMchugh2263Pj7
         {
             if(nodeValue == "") { nodeValue = s; }
             if (!IsValInSubTree(s)) {
+                // makes a node with the correct depth
                 BinaryTreeNode newNode = new BinaryTreeNode(0);
                 newNode.nodeValue = s;
+                // sends it into the insert function
                 insert(newNode);
                 
             }
@@ -255,11 +266,12 @@ namespace RalphMchugh2263Pj7
 
         }
 
-
+        // this is where I hid the delete
         /* Ralph Liam McHugh 11/8/2023
          * this function finds the node given and then 
          * re-attaches any children it has after removing it
         */
+        /*
         public void delete(BinaryTreeNode node){
             
             // is the node given a leaf node? if so just set it's place in the parent equal to null
@@ -289,18 +301,19 @@ namespace RalphMchugh2263Pj7
                                  so the parent of the node points to one child and the other child is a child of that
 
                     situation 2. 
-             */
+             
             else if(node.leftTree != null && node.rightTree != null)
             {
 
             }
         }
-
+        */
         /******************************************************************************
        * DeleteValFromSubTree locates and deletes Value from tree. returns true iff
        * Value in tree. 
        * Ralph Liam McHugh 11/8/2023
        ********************************************************************************/
+        /*
         public Boolean DeleteValFromSubTree(string s)
         {
             // the value you told me to delete wasn't in the tree to begin with
@@ -312,7 +325,7 @@ namespace RalphMchugh2263Pj7
                 return true;
             }
         }
-
+        */
         /* Ralph Liam McHugh 11/8/2023
          * this function combines the two nodes, it runs through the secondNode, plucking values off and inserting them into 
          * firstNode. Since insertion is inherently sorted, it works great
@@ -340,20 +353,17 @@ namespace RalphMchugh2263Pj7
          * Finds the minimum depth to get to a leaf in the tree
          * returns the depth as an int 
          */
-        public int minDepth(BinaryTreeNode node, int d) {
-            // d as in depth
-            
+        public int minDepth(BinaryTreeNode node) {
             // did you feed me nothing? if so it's a depth of zero
             if(node == null) { return 0; }
             // are you at a leaf? return the depth of that leaf
-            if(node.leftTree == null && node.rightTree == null){ return d; }
+            if(node.leftTree == null && node.rightTree == null){ return node.depth; }
             // there is still a branch on the right, check the depth
-            if(node.leftTree == null) { return minDepth(node.rightTree, d += 1); }
+            if(node.leftTree == null) { return minDepth(node.rightTree); }
             // there is still a branch on the left, check the depth
-            if(node.rightTree == null) { return minDepth(node.leftTree, d += 1);  }
-
+            if(node.rightTree == null) { return minDepth(node.leftTree);  }
             // give me the minimum between the left and the right 
-            return Math.Min(minDepth(node.leftTree, d +=1 ), minDepth(node.rightTree, d += 1));
+            return Math.Min(minDepth(node.leftTree), minDepth(node.rightTree));
            
         }
         
@@ -361,20 +371,18 @@ namespace RalphMchugh2263Pj7
          * Finds the maximum depth to get to a leaf in the tree
          * returns the depth as an int
          */
-        public int maxDepth(BinaryTreeNode node, int d) {
-            // d as in depth
-
+        public int maxDepth(BinaryTreeNode node) {
             // did you feed me nothing? if so it's a depth of zero
             if (node == null) { return 0; }
             // are you at a leaf? return the depth of that leaf
-            if (node.leftTree == null && node.rightTree == null) { return d; }
+            if (node.leftTree == null && node.rightTree == null) { return node.depth; }
             // there is still a branch on the right, check the depth
-            if (node.leftTree == null) { return minDepth(node.rightTree, d += 1); }
+            if (node.leftTree == null) { return maxDepth(node.rightTree); }
             // there is still a branch on the left, check the depth
-            if (node.rightTree == null) { return minDepth(node.leftTree, d += 1); }
+            if (node.rightTree == null) { return maxDepth(node.leftTree); }
 
             // give me the minimum between the left and the right 
-            return Math.Max(minDepth(node.leftTree, d += 1), minDepth(node.rightTree, d += 1));
+            return Math.Max(maxDepth(node.leftTree), maxDepth(node.rightTree));
         }
     }
 }

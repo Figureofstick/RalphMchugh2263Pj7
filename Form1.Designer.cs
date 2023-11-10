@@ -28,55 +28,221 @@
         /// </summary>
         private void InitializeComponent()
         {
-            menuStrip1 = new MenuStrip();
-            toolsToolStripMenuItem = new ToolStripMenuItem();
-            buildTreeToolStripMenuItem = new ToolStripMenuItem();
-            menuStrip1.SuspendLayout();
+            btnBuildTree = new Button();
+            btnFindNode = new Button();
+            btnCheckVal = new Button();
+            btnMinDepth = new Button();
+            btnMaxVal = new Button();
+            btnMinVal = new Button();
+            txtBoxBuildTreeIn = new TextBox();
+            btnMaxDepth = new Button();
+            btnInfixString = new Button();
+            btnSubTree = new Button();
+            lblMaxValOut = new Label();
+            lblMinValOut = new Label();
+            lblMaxDepthOut = new Label();
+            lblMinDepthOut = new Label();
+            txtBoxFindNodeIn = new TextBox();
+            txtBoxCheckValIn = new TextBox();
+            rTxtBoxOutput = new RichTextBox();
             SuspendLayout();
             // 
-            // menuStrip1
+            // btnBuildTree
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolsToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
-            menuStrip1.TabIndex = 0;
-            menuStrip1.Text = "menuStrip1";
+            btnBuildTree.Location = new Point(35, 26);
+            btnBuildTree.Name = "btnBuildTree";
+            btnBuildTree.Size = new Size(75, 23);
+            btnBuildTree.TabIndex = 0;
+            btnBuildTree.Text = "Build Tree";
+            btnBuildTree.UseVisualStyleBackColor = true;
             // 
-            // toolsToolStripMenuItem
+            // btnFindNode
             // 
-            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { buildTreeToolStripMenuItem });
-            toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            toolsToolStripMenuItem.Size = new Size(46, 20);
-            toolsToolStripMenuItem.Text = "Tools";
+            btnFindNode.Location = new Point(35, 77);
+            btnFindNode.Name = "btnFindNode";
+            btnFindNode.Size = new Size(75, 23);
+            btnFindNode.TabIndex = 1;
+            btnFindNode.Text = "Find Node";
+            btnFindNode.UseVisualStyleBackColor = true;
             // 
-            // buildTreeToolStripMenuItem
+            // btnCheckVal
             // 
-            buildTreeToolStripMenuItem.Name = "buildTreeToolStripMenuItem";
-            buildTreeToolStripMenuItem.Size = new Size(180, 22);
-            buildTreeToolStripMenuItem.Text = "Build Tree";
-            buildTreeToolStripMenuItem.Click += buildTreeToolStripMenuItem_Click;
+            btnCheckVal.Location = new Point(35, 123);
+            btnCheckVal.Name = "btnCheckVal";
+            btnCheckVal.Size = new Size(168, 23);
+            btnCheckVal.TabIndex = 2;
+            btnCheckVal.Text = "Is the value in the (sub)tree?";
+            btnCheckVal.UseVisualStyleBackColor = true;
+            // 
+            // btnMinDepth
+            // 
+            btnMinDepth.Location = new Point(485, 164);
+            btnMinDepth.Name = "btnMinDepth";
+            btnMinDepth.Size = new Size(75, 23);
+            btnMinDepth.TabIndex = 3;
+            btnMinDepth.Text = "Min Depth";
+            btnMinDepth.UseVisualStyleBackColor = true;
+            // 
+            // btnMaxVal
+            // 
+            btnMaxVal.Location = new Point(485, 77);
+            btnMaxVal.Name = "btnMaxVal";
+            btnMaxVal.Size = new Size(75, 23);
+            btnMaxVal.TabIndex = 4;
+            btnMaxVal.Text = "Max Value";
+            btnMaxVal.UseVisualStyleBackColor = true;
+            // 
+            // btnMinVal
+            // 
+            btnMinVal.Location = new Point(485, 106);
+            btnMinVal.Name = "btnMinVal";
+            btnMinVal.Size = new Size(75, 23);
+            btnMinVal.TabIndex = 5;
+            btnMinVal.Text = "Min Value";
+            btnMinVal.UseVisualStyleBackColor = true;
+            // 
+            // txtBoxBuildTreeIn
+            // 
+            txtBoxBuildTreeIn.Location = new Point(133, 26);
+            txtBoxBuildTreeIn.Name = "txtBoxBuildTreeIn";
+            txtBoxBuildTreeIn.Size = new Size(100, 23);
+            txtBoxBuildTreeIn.TabIndex = 6;
+            txtBoxBuildTreeIn.Text = "Tree Size Input";
+            // 
+            // btnMaxDepth
+            // 
+            btnMaxDepth.Location = new Point(485, 135);
+            btnMaxDepth.Name = "btnMaxDepth";
+            btnMaxDepth.Size = new Size(75, 23);
+            btnMaxDepth.TabIndex = 7;
+            btnMaxDepth.Text = "Max Depth";
+            btnMaxDepth.UseVisualStyleBackColor = true;
+            // 
+            // btnInfixString
+            // 
+            btnInfixString.Location = new Point(35, 164);
+            btnInfixString.Name = "btnInfixString";
+            btnInfixString.Size = new Size(168, 23);
+            btnInfixString.TabIndex = 8;
+            btnInfixString.Text = "Infix String of Values";
+            btnInfixString.UseVisualStyleBackColor = true;
+            // 
+            // btnSubTree
+            // 
+            btnSubTree.Location = new Point(35, 209);
+            btnSubTree.Name = "btnSubTree";
+            btnSubTree.Size = new Size(168, 23);
+            btnSubTree.TabIndex = 9;
+            btnSubTree.Text = "(Ugly) String of Values ";
+            btnSubTree.UseVisualStyleBackColor = true;
+            // 
+            // lblMaxValOut
+            // 
+            lblMaxValOut.AutoSize = true;
+            lblMaxValOut.Location = new Point(584, 81);
+            lblMaxValOut.Name = "lblMaxValOut";
+            lblMaxValOut.Size = new Size(49, 15);
+            lblMaxValOut.TabIndex = 10;
+            lblMaxValOut.Text = ": (value)";
+            // 
+            // lblMinValOut
+            // 
+            lblMinValOut.AutoSize = true;
+            lblMinValOut.Location = new Point(584, 110);
+            lblMinValOut.Name = "lblMinValOut";
+            lblMinValOut.Size = new Size(49, 15);
+            lblMinValOut.TabIndex = 11;
+            lblMinValOut.Text = ": (value)";
+            // 
+            // lblMaxDepthOut
+            // 
+            lblMaxDepthOut.AutoSize = true;
+            lblMaxDepthOut.Location = new Point(584, 139);
+            lblMaxDepthOut.Name = "lblMaxDepthOut";
+            lblMaxDepthOut.Size = new Size(52, 15);
+            lblMaxDepthOut.TabIndex = 12;
+            lblMaxDepthOut.Text = ": (depth)";
+            // 
+            // lblMinDepthOut
+            // 
+            lblMinDepthOut.AutoSize = true;
+            lblMinDepthOut.Location = new Point(584, 168);
+            lblMinDepthOut.Name = "lblMinDepthOut";
+            lblMinDepthOut.Size = new Size(52, 15);
+            lblMinDepthOut.TabIndex = 13;
+            lblMinDepthOut.Text = ": (depth)";
+            // 
+            // txtBoxFindNodeIn
+            // 
+            txtBoxFindNodeIn.Location = new Point(133, 77);
+            txtBoxFindNodeIn.Name = "txtBoxFindNodeIn";
+            txtBoxFindNodeIn.Size = new Size(120, 23);
+            txtBoxFindNodeIn.TabIndex = 14;
+            txtBoxFindNodeIn.Text = "Node (value) to find";
+            // 
+            // txtBoxCheckValIn
+            // 
+            txtBoxCheckValIn.Location = new Point(220, 123);
+            txtBoxCheckValIn.Name = "txtBoxCheckValIn";
+            txtBoxCheckValIn.Size = new Size(100, 23);
+            txtBoxCheckValIn.TabIndex = 15;
+            txtBoxCheckValIn.Text = "Value to check";
+            // 
+            // rTxtBoxOutput
+            // 
+            rTxtBoxOutput.Location = new Point(35, 238);
+            rTxtBoxOutput.Name = "rTxtBoxOutput";
+            rTxtBoxOutput.Size = new Size(698, 184);
+            rTxtBoxOutput.TabIndex = 16;
+            rTxtBoxOutput.Text = "Click one of the string buttons";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(menuStrip1);
-            MainMenuStrip = menuStrip1;
+            Controls.Add(rTxtBoxOutput);
+            Controls.Add(txtBoxCheckValIn);
+            Controls.Add(txtBoxFindNodeIn);
+            Controls.Add(lblMinDepthOut);
+            Controls.Add(lblMaxDepthOut);
+            Controls.Add(lblMinValOut);
+            Controls.Add(lblMaxValOut);
+            Controls.Add(btnSubTree);
+            Controls.Add(btnInfixString);
+            Controls.Add(btnMaxDepth);
+            Controls.Add(txtBoxBuildTreeIn);
+            Controls.Add(btnMinVal);
+            Controls.Add(btnMaxVal);
+            Controls.Add(btnMinDepth);
+            Controls.Add(btnCheckVal);
+            Controls.Add(btnFindNode);
+            Controls.Add(btnBuildTree);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Ralph McHugh - Binary Search Tree and Display - Pj 7";
             Load += Form1_Load;
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem toolsToolStripMenuItem;
-        private ToolStripMenuItem buildTreeToolStripMenuItem;
+        private Button btnBuildTree;
+        private Button btnFindNode;
+        private Button btnCheckVal;
+        private Button btnMinDepth;
+        private Button btnMaxVal;
+        private Button btnMinVal;
+        private TextBox txtBoxBuildTreeIn;
+        private Button btnMaxDepth;
+        private Button btnInfixString;
+        private Button btnSubTree;
+        private Label lblMaxValOut;
+        private Label lblMinValOut;
+        private Label lblMaxDepthOut;
+        private Label lblMinDepthOut;
+        private TextBox txtBoxFindNodeIn;
+        private TextBox txtBoxCheckValIn;
+        private RichTextBox rTxtBoxOutput;
     }
 }
